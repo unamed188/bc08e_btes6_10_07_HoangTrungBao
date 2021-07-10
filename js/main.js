@@ -52,10 +52,23 @@
             return form.valid();
         },
         onFinished: function(event, currentIndex) {
-            alert('Submited');
-        },
-        onStepChanged: function(event, currentIndex, priorIndex) {
+            let arrInput = document.querySelectorAll ('fieldset input, fieldset select');
 
+            let userInput = {};
+            for (let i = 0; i < arrInput.length; i++) {
+                let id = arrInput[i].id;
+                let value = arrInput[i].value;
+
+                userInput = {...userInput, [id]: value}
+            }
+            
+            let content = ``;
+            for (let key in userInput) {
+                content += `<tr><td>${key}</td>  <td>${userInput[key]}</td></tr>`;
+            }
+            document.querySelector('#userInfo').innerHTML = content;
+        },
+        onStepChanged: function () {
             return true;
         }
     });
